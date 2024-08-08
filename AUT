@@ -436,6 +436,14 @@ local Toggle = MainAutofarm:Toggle({Name = "Auto Kill Dio Fushigoro",Flag = "Tog
     getgenv().AutoFarmDioBoss = Value;
 
     task.spawn(function()
+        if getgenv().AutoFarmDioBoss == true then
+            pcall(function()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2806.075927734375,1023.2745361328125,-744.5523681640625);
+            end)
+        end
+    end)
+
+    task.spawn(function()
         if getgenv().AutoFarmDioBoss == false then
             pcall(function()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2806.075927734375,1023.2745361328125,-744.5523681640625);
@@ -452,6 +460,19 @@ local Toggle = MainAutofarm:Toggle({Name = "Auto Kill Dio Fushigoro",Flag = "Tog
                 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("NpcFunc"):InvokeServer(unpack(args));
             end)
             task.wait(0.015);
+        end
+    end)
+
+    task.spawn(function()
+        while getgenv().AutoFarmDioBoss == true do
+            pcall(function()
+                for _,v in pairs(workspace.Effects:GetChildren()) do
+                    if v.Name == "Hold up, aint you Dio?" then
+                        v:Destroy();
+                    end
+                end
+            end)
+            task.wait(0.15);
         end
     end)
     
