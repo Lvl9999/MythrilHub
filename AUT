@@ -24,6 +24,7 @@ elseif getgenv().Device == "PC" then
 end
 
 -- // Loaded Notification \\ --
+BoredLibrary.prompt("Mythril Hub  ♦️","Script in Rework",1.5);
 BoredLibrary.prompt("Mythril Hub  ♦️","Welcome To Mythril Hub :3",1.5);BoredLibrary.prompt("Mythril Hub  ♦️","Current Version: "..getgenv().CurrentVersion,1.5);
 local MainWindow = VenusLibrary:Load({Name = "Mythril Hub   ♦️  -  dsc.gg/Flames-Community", Theme = "Dark", SizeX = X,SizeY = Y,ColorOverrides = {}});
 local HomeTab = MainWindow:Tab("Home");
@@ -424,6 +425,77 @@ local Toggle = MainAutofarm:Toggle({Name = "Auto Kill Prisoners",Flag = "Toggle"
                     end)
                 else
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2588.402099609375,898.4298095703125,5582.00439453125);
+                end
+            end)
+            task.wait(0.0000000000015);
+        end
+    end)
+end})
+
+local Toggle = MainAutofarm:Toggle({Name = "Auto Kill Dio Fushigoro",Flag = "Toggle",Callback = function(Value)
+    getgenv().AutoFarmDioBoss = Value;
+
+    task.spawn(function()
+        if getgenv().AutoFarmDioBoss == false then
+            pcall(function()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2806.075927734375,1023.2745361328125,-744.5523681640625);
+            end)
+        end
+    end)
+    
+    task.spawn(function()
+        while getgenv().AutoFarmDioBoss == true do
+            pcall(function()
+                local args = {[1] = "Spawn Boss Altar",[2] = "Dio",[3] = workspace:WaitForChild("NPCSpawns"):WaitForChild("Boss Altar"):WaitForChild("Spawn"):WaitForChild("Part")};
+                game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("NpcFunc"):InvokeServer(unpack(args));
+                local args = {[1] = "Spawn Boss Altar",[2] = "Dio",[3] = workspace:WaitForChild("NPCSpawns"):WaitForChild("Boss Altar"):WaitForChild("Spawn"):WaitForChild("Part")};
+                game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("NpcFunc"):InvokeServer(unpack(args));
+            end)
+            task.wait(0.015);
+        end
+    end)
+    
+    task.spawn(function()
+        while getgenv().AutoFarmDioBoss == true do
+            pcall(function()
+                getgenv().Target = nil;getgenv().FoundAnything = false;
+                for i,v in ipairs({"Dio"}) do
+                    for _,x in ipairs(workspace.Living:GetChildren()) do
+                        if x:FindFirstChild("Head") and x.Name:lower():find(v:lower()) then
+                            if x:FindFirstChildOfClass("Humanoid").Health ~= 0 then
+                                getgenv().Target = x;getgenv().FoundAnything = true;
+                                break;
+                            end
+                        end
+                    end
+                end
+            end)
+            task.wait(0.015);
+        end
+    end)
+    
+    task.spawn(function()
+        while getgenv().AutoFarmDioBoss == true do
+            pcall(function()
+                if getgenv().Target and game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(getgenv().Target.HumanoidRootPart.Position - Vector3.new(0,0,-5),getgenv().Target.HumanoidRootPart.Position);
+                    task.spawn(function()
+                        local args = {[1] = "MouseButton1"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args));
+                        local args = {[1] = "E"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args));                   
+                        local args = {[1] = "T"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args));  
+                        local args = {[1] = "V"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args)); 
+                        local args = {[1] = "G"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args)); 
+                        local args = {[1] = "H"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args)); 
+                        local args = {[1] = "R"};
+                        game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args)); 
+                        task.wait(0.25);
+                    end)
                 end
             end)
             task.wait(0.0000000000015);
