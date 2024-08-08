@@ -503,6 +503,61 @@ local Toggle = MainAutofarm:Toggle({Name = "Auto Kill Dio Fushigoro",Flag = "Tog
     end)
 end})
 
+Farming:Toggle("Auto Kill Guardian",false,function(Value)
+    getgenv().AutoGuardian = Value;
+
+    task.spawn(function()
+        while getgenv().AutoGuardian == true do
+            pcall(function()
+                if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3563.117432,937.591919,-431.533813);task.wait(0.45);
+                else
+                    task.wait(6.5);
+                end
+            end)
+        end
+    end)
+   
+    task.spawn(function()
+        while getgenv().AutoGuardian == true do
+            pcall(function()
+                getgenv().Targetz = nil;getgenv().FoundAnythingz = false
+                for i,v in ipairs({"Guardian"}) do
+                    for _,x in ipairs(workspace.Living:GetChildren()) do
+                        if x:FindFirstChild("Head") and x.Name:lower():find(v:lower()) then
+                            getgenv().Targetz = x getgenv().FoundAnythingz = true;
+                            break;
+                        end
+                    end
+                end
+            end)
+            task.wait(0.45);
+        end
+    end)
+
+    task.spawn(function()
+        local connection
+        connection = game:GetService("RunService").Heartbeat:Connect(function()
+            if getgenv().AutoGuardian == true then
+                pcall(function()
+                    if getgenv().FoundAnythingz == true and not game.Players[game.Players.LocalPlayer.Name].Cooldowns:FindFirstChild("Rush Attack") and game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(getgenv().Targetz.Head.Position - Vector3.new(0,5,0),getgenv().Targetz.Head.Position);
+                        task.spawn(function()
+                            local args = {[1] = "MouseButton1"};
+                            game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("MoveInputService"):WaitForChild("RF"):WaitForChild("FireInput"):InvokeServer(unpack(args));
+                        end)
+                    else
+                        task.wait(7.15);
+                    end
+                end)
+            else
+                connection:Disconnect();
+            end
+            task.wait(1);
+        end)
+    end)
+end)
+
 local AutoTraitStuff = FarmingTab:Section({Name = "Auto Pick Traits",column = 2});
 local DropDown = AutoTraitStuff:Dropdown({Default = "Select Legendary Traits",Content = {"Prime","Solar","Cursed","Vampiric","Gluttonous","Voided","Gambler","Overflowing","Deferred","True","Cultivation","Economic","Angelic"},MultiChoice = true,Flag = "Dropdown",Callback = function(Value)
     getgenv().WantedLegendaryTraits = Value;
