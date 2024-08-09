@@ -947,6 +947,34 @@ Farming:Toggle("Auto Open Skin Crates",false,function(Value)
     getgenv().AutoOpenSkinCrate = Value;
 
     task.spawn(function()
+        if getgenv().AutoOpenSkinCrate == true then
+            pcall(function()
+                BoredLibrary.prompt("Mythril Hub  ♦️","Resseting Every 1 Minute",3.5);
+                BoredLibrary.prompt("Mythril Hub  ♦️","To Get Rid Of Combat to Open Crates Ok?",3.5);
+            end)
+        end
+    end)
+
+    task.spawn(function()
+        while getgenv().AutoOpenSkinCrate == true do
+            pcall(function()
+                local args = {[1] = "Death FX"};
+                game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("InputFunc"):InvokeServer(unpack(args));                
+            end)
+            task.wait(70);
+        end
+    end)
+
+    task.spawn(function()
+        while getgenv().AutoOpenSkinCrate == true do
+            pcall(function()
+                game:GetService("Players").LocalPlayer.PlayerGui.UI.Prompt.Visible = false;
+            end)
+            task.wait(0.015);
+        end
+    end)
+
+    task.spawn(function()
         while getgenv().AutoOpenSkinCrate == true do
             pcall(function()
                 local args = {[1] = "ItemInventory"};
@@ -959,7 +987,7 @@ Farming:Toggle("Auto Open Skin Crates",false,function(Value)
                     end
                 end
             end)
-            task.wait(1.15);
+            task.wait(0.45);
         end
     end)
 end)
@@ -972,6 +1000,20 @@ Farming:Toggle("Auto Buy Skin Crates",false,function(Value)
             pcall(function()
                 local args = {[1] = "Skin_Crate",[2] = "UShards",[3] = 1};
                 game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ShopService"):WaitForChild("RF"):WaitForChild("BuySkinCrate"):InvokeServer(unpack(args));                
+            end)
+            task.wait(0.15);
+        end
+    end)
+end)
+
+Farming:Toggle("Auto Buy Event Skin Crates",false,function(Value)
+    getgenv().AutoBuyEventSkinCrate = Value;
+
+    task.spawn(function()
+        while getgenv().AutoBuyEventSkinCrate == true do
+            pcall(function()
+                local args = {[1] = "Event_Crate_2",[2] = "PoolPoints",[3] = 1};
+                game:GetService("ReplicatedStorage"):WaitForChild("ReplicatedModules"):WaitForChild("KnitPackage"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ShopService"):WaitForChild("RF"):WaitForChild("BuySkinCrate"):InvokeServer(unpack(args));
             end)
             task.wait(0.15);
         end
