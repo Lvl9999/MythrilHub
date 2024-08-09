@@ -7,7 +7,6 @@
 ##### Tip: Report any bugs you encounter in my discord server!
 ```lua
 getgenv().ToggleUI = "J" -- //  Key Toggle "J" set by default however you can change it.
-getgenv().Device = "PC" -- // PC or Mobile (Changes Suitable Screen Size For You).
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvl9999/MythrilHub/main/AUT"))();
 ```
