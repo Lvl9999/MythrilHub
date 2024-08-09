@@ -7,6 +7,7 @@
 ##### Tip: Report any bugs you encounter in my discord server!
 ```lua
 getgenv().ToggleUI = "J" -- //  Key Toggle "J" set by default however you can change it.
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Lvl9999/MythrilHub/main/AUT"))();
 ```
 ##### Warning: Some features might get you banned from being reported by players.
